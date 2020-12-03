@@ -1,10 +1,13 @@
 import Routes from './Routes';
+import { BookStoreProvider } from './context-api/BookStoreContext';
 
 function App() {
   return (
-    <div className="App">
-      <Routes />
-    </div>
+    <BookStoreProvider>
+      <div className="App">
+        <Routes />
+      </div>
+    </BookStoreProvider>
   );
 }
 
