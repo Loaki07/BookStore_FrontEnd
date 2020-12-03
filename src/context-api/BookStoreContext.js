@@ -3,14 +3,16 @@ import React, { useState, createContext } from 'react';
 export const BookStoreContext = createContext();
 
 export const BookStoreProvider = (props) => {
-  const [users, setUsers] = useState({
+  const [state, setState] = useState({
+    loginUserEmailId: '',
+    loginUserPassword: '',
     toggleLogInSignUp: false,
     message: 'baseState',
   });
 
   return (
     <div>
-      <BookStoreContext.Provider value={[users, setUsers]}>
+      <BookStoreContext.Provider value={[state, setState]}>
         {props.children}
       </BookStoreContext.Provider>
     </div>
