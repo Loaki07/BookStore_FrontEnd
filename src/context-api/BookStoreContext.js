@@ -6,11 +6,11 @@ export const BookStoreProvider = (props) => {
   const [state, setState] = useState({
     loginUserEmailId: '',
     loginUserPassword: '',
-    fullName: "",
-    emailId: "",
-    password: "",
-    mobileNumber: "",
-    toggleLogInSignUp: false,
+    fullName: '',
+    emailId: '',
+    password: '',
+    mobileNumber: '',
+    toggleLogInSignUp: true,
   });
 
   return (

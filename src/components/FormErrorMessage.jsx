@@ -1,4 +1,5 @@
 import React from 'react'
+import './styles/errorMessage.scss'
 
 const FormErrorMessage = (props) => {
   return (

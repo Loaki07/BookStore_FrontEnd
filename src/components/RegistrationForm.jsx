@@ -114,7 +114,7 @@ const [state, setState] = useContext(BookStoreContext);
             <Form.Group>
             <Form.Label>Mobile Number</Form.Label>
               <Field 
-                    type="number" 
+                    type="text" 
                     placeholder="Mobile Number" 
                     className="form-control"
                     name="mobileNumber" 
