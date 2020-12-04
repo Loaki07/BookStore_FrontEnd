@@ -1,0 +1,16 @@
+.homepage-container{
+  background-color: black;
+}
+
+.homepage-container{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .homepage-float-component{
+    display: flex;
+    border: 2px solid red;
+    width: 30rem;
+  }
+}
