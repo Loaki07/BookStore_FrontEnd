@@ -15,7 +15,7 @@ export const BookStoreProvider = (props) => {
 
   return (
     <div>
-      <BookStoreContext.Provider value={[state, setState]}>
+      <BookStoreContext.Provider value={[ state, setState ]}>
         {props.children}
       </BookStoreContext.Provider>
     </div>

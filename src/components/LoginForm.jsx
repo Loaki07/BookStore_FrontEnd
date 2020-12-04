@@ -4,7 +4,13 @@ import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import FormErrorMessage from './FormErrorMessage.jsx';
 import { Form, Button } from 'react-bootstrap';
+import UserApis from "../services/UserApis"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css'
+toast.configure()
+
+const { logIn } = new UserApis();
 
 const initialValues = {
   emailId: "",
@@ -20,19 +26,34 @@ const validationSchema = Yup.object().shape({
                .required('Required!'),
 })
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const [state, setState] = useContext(BookStoreContext);
 
-  const updateEmail = (e) => {
-    setState({...state, loginUserEmailId: e.target.value})
+  const handleFormChange = (e) =>{
+    setState({ ...state, [e.target.name]: e.target.value})
   }
 
-  const updatePasssword = (e) => {
-    setState({...state, loginUserPassword: e.target.value})
-  }
-
-  const handleFormSubmit = () => {
-    console.log("From Submit", state);
+  const handleFormSubmit = async () => {
+    try {
+      console.log("From Submit", state);
+      const loginUserObject = {
+        emailId: state.emailId,
+        password: state.password
+      }
+      const result = await logIn(loginUserObject);
+      if (result.status === 200) {
+        toast.success('Login Successfull !', {
+          position: toast.POSITION.TOP_CENTER
+        })
+        localStorage.setItem('token', result.data.token);
+        // props.history.push('/dashboard');
+        console.log(result);
+      }
+    } catch (error) {
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }
   } 
 
   return (
@@ -52,7 +73,7 @@ const LoginForm = () => {
                   name="emailId" 
                   value={values.emailId} 
                   onInput={handleChange}
-                  onChange={updateEmail} 
+                  onChange={handleFormChange} 
                   autoComplete="off" 
                 ></Field>
                 <ErrorMessage 
@@ -69,7 +90,7 @@ const LoginForm = () => {
                     name="password" 
                     value={values.password} 
                     onInput={handleChange}
-                    onChange={updatePasssword} 
+                    onChange={handleFormChange} 
                     autoComplete="off" 
                   ></Field>
                   <ErrorMessage 

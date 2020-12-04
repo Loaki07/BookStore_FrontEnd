@@ -3,8 +3,14 @@ import { BookStoreContext } from '../context-api/BookStoreContext'
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import FormErrorMessage from './FormErrorMessage.jsx';
+import UserApis from "../services/UserApis"
 import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+toast.configure()
+
+const { registerNewUser } = new UserApis();
 
 const initialValues = {
   fullName: "",
@@ -29,27 +35,31 @@ const validationSchema = Yup.object().shape({
                    .required('Required!'),
 })
 
-const RegistrationForm = () => {
+const RegistrationForm = (props) => {
 const [state, setState] = useContext(BookStoreContext);
 
-  const updateFullName = (e) => {
-    setState({ ...state, fullName: e.target.value })
+  const handleFormChange = (e) =>{
+    setState({ ...state, [e.target.name]: e.target.value})
   }
 
-  const updateEmailId = (e) => {
-    setState({ ...state, emailId: e.target.value })
-  }
-
-  const updatePassword = (e) => {
-    setState({ ...state, password: e.target.value })
-  }
-
-  const updateMobileNumber = (e) => {
-    setState({ ...state, mobileNumber: e.target.value })
-  }
-
-  const handleFormSubmit = () => {
-    console.log("Form Register", state); 
+  const handleFormSubmit = async () => {
+    try {
+      console.log("Form Register", state); 
+      const registerUserObject = {
+        fullName: state.fullName,
+        emailId: state.emailId,
+        password: state.password,
+        mobileNumber: state.mobileNumber
+      }
+      const result = await registerNewUser(registerUserObject);
+      if (result.status === 200) {
+        toast.success('Registration Successfull !', {position: toast.POSITION.TOP_CENTER});
+        // props.history.push('/');
+        console.log(result);
+      }
+    } catch (error) {
+      toast.error(error.message, {position: toast.POSITION.TOP_CENTER});
+    }
   } 
 
   return (
@@ -58,7 +68,7 @@ const [state, setState] = useContext(BookStoreContext);
       validationSchema={validationSchema}
       onSubmit={handleFormSubmit}
       >
-        {({ handleSubmit, handleChange, values, handleBlur }) => (
+        {({ handleSubmit, handleChange, values }) => (
           <FormikForm>
             <Form.Group>
               <Form.Label>Full Name</Form.Label>
@@ -69,7 +79,7 @@ const [state, setState] = useContext(BookStoreContext);
                   name="fullName" 
                   value={values.fullName} 
                   onInput={handleChange}
-                  onChange={updateFullName} 
+                  onChange={handleFormChange} 
                   autoComplete="off" 
                 ></Field>
                 <ErrorMessage 
@@ -86,7 +96,7 @@ const [state, setState] = useContext(BookStoreContext);
                       name="emailId" 
                       value={values.emailId} 
                       onInput={handleChange}
-                      onChange={updateEmailId} 
+                      onChange={handleFormChange} 
                       autoComplete="off" 
                     ></Field>
                     <ErrorMessage 
@@ -103,7 +113,7 @@ const [state, setState] = useContext(BookStoreContext);
                     name="password" 
                     value={values.password} 
                     onInput={handleChange}
-                    onChange={updatePassword} 
+                    onChange={handleFormChange} 
                     autoComplete="off" 
                   ></Field>
                   <ErrorMessage 
@@ -120,7 +130,7 @@ const [state, setState] = useContext(BookStoreContext);
                     name="mobileNumber" 
                     value={values.mobileNumber} 
                     onInput={handleChange}
-                    onChange={updateMobileNumber} 
+                    onChange={handleFormChange} 
                     autoComplete="off" 
                   ></Field>
                   <ErrorMessage 

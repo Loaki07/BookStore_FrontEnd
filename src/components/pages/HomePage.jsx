@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginForm from '../LoginForm.jsx'
 import RegistrationForm from '../RegistrationForm.jsx';
 import '../styles/homepage.scss';
-import '../../assets/book-store-logo.png';
+import logo from  '../../assets/bookstore-logo-circle.png';
 
 
 const HomePage = () => {
@@ -22,14 +22,14 @@ const HomePage = () => {
   return (
     <div className="homepage-container">
       <div className="homepage-float-component">
-      <Card style={{border: "2px solid black"}}>
+      <Card style={{border: "2px solid black", width: "10rem"}}>
         <Card.Img 
           variant="top" 
           alt="homepage-logo"
-          src="test.png" 
+          src={logo} 
           className="homepage-image"
-          width="100px"
-          height="200px"
+          width="70px"
+          // height="100px"
         />
         <Card.Body>
           <Card.Title>ONLINE BOOK SHOPPING</Card.Title>
