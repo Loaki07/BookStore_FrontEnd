@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useCallback } from 'react';
 import { BookStoreContext } from '../../context-api/BookStoreContext';
 import HeaderDashboard from '../HeaderDashboard.jsx';
 import '../styles/dashboard.scss'
 import { Container, DropdownButton, Dropdown, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BookApis from '../../services/BookApis';
-import books from  '../../assets/book.json'
+// import books from  '../../assets/book.json'
 
 const {getAllBooks, addBook} = new BookApis();
 
@@ -13,35 +13,36 @@ const DashBoard = () => {
 
   const [state, setState] = useContext(BookStoreContext);
 
-  const getBooks = async () => {
+  const getBooks = useCallback(async() => {
     try {
       const result = await getAllBooks();
       setState({...state, bookArray: result.data.data})
-      console.log(result.data.data.length);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [setState, state]);
 
-  const addBooks = () => {
-    console.log(books);
-    books.map(async book => {
-      await addBook(book);
-    })
-  };
+  // const addBooks = () => {
+  //   console.log(books);
+  //   books.map(async book => {
+  //     await addBook(book);
+  //   })
+  // };
 
   useEffect(() => {
-    getBooks();       
-  });
+    getBooks();
+  }, [getBooks]);
 
   const test = () => {
-    for (var i=0; i<20; i++) {
-      return (
-      <Col>
-        Book Card
+    return state.bookArray.map((book, idx) => {
+      let cardsArray =[];
+      cardsArray.push(
+      <Col key={idx}>
+        book
       </Col>
       ) 
-    }
+      return cardsArray;
+    })
   }
 
   return (
