@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useCallback } from 'react';
 import { BookStoreContext } from '../../context-api/BookStoreContext';
 import HeaderDashboard from '../HeaderDashboard.jsx';
+import Footer from '../Footer.jsx';
 import '../styles/dashboard.scss'
 import { Container, DropdownButton, Dropdown, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BookApis from '../../services/BookApis';
-// import books from  '../../assets/book.json'
 
 const {getAllBooks, addBook} = new BookApis();
 
@@ -21,13 +21,6 @@ const DashBoard = () => {
       console.log(error);
     }
   }, [setState, state]);
-
-  // const addBooks = () => {
-  //   console.log(books);
-  //   books.map(async book => {
-  //     await addBook(book);
-  //   })
-  // };
 
   useEffect(() => {
     getBooks();
@@ -71,11 +64,7 @@ const DashBoard = () => {
           </Row>
         </Container>
       </>
-      <footer className="dashboard-footer d-flex align-items-center">
-        <span className="ml-5">
-          Copyright © 2020, Bookstore Private Limited. All Rights Reserved
-        </span>
-      </footer>
+      <Footer/>
     </>
   )
 }
