@@ -8,6 +8,7 @@ const BookCard = ({book}) => {
   return (
     <Card 
       className="m-3 p-3 rounded book-card"
+      fluid
     >
       <Link to={`/books/${book._id}`}>
         <Card.Img 
