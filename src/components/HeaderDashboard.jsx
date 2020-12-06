@@ -10,7 +10,7 @@ const HeaderDashboard = () => {
       <Navbar 
         variant="dark"
         expand="lg"
-        className="header-dashboard"
+        className="header-dashboard pl-5 pr-5"
       >
         <Navbar.Brand href="#home">
           <img
@@ -29,13 +29,21 @@ const HeaderDashboard = () => {
               type="text" 
               placeholder="Search" 
               className="mr-sm-2" 
+              size="sm"
             />
-            <Button variant="outline-success">Search</Button>
+            <Button 
+              variant="outline-success"
+              size="sm"
+            >Search</Button>
           </Form>
         </Navbar.Collapse>
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Profile</Nav.Link>
-            <Nav.Link href="#link">Cart</Nav.Link>
+            <Nav.Link href="#home">
+              Profile
+            </Nav.Link>
+            <Nav.Link href="#link">
+              Cart
+            </Nav.Link>
           </Nav>
       </Navbar>
     </>

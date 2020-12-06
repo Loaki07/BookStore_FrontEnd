@@ -11,6 +11,7 @@ export const BookStoreProvider = (props) => {
     password: '',
     mobileNumber: '',
     toggleLogInSignUp: true,
+    bookArray: [],
   });
 
   return (
