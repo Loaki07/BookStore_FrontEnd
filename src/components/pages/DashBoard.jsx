@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useCallback } from 'react';
 import { BookStoreContext } from '../../context-api/BookStoreContext';
 import HeaderDashboard from '../HeaderDashboard.jsx';
 import Footer from '../Footer.jsx';
+import BookCard from '../BookCard.jsx';
 import '../styles/dashboard.scss'
 import { Container, DropdownButton, Dropdown, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,44 +27,40 @@ const DashBoard = () => {
     getBooks();
   }, [getBooks]);
 
-  const test = () => {
-    return state.bookArray.map((book, idx) => {
-      let cardsArray =[];
-      cardsArray.push(
-      <Col key={idx}>
-        book
-      </Col>
-      ) 
-      return cardsArray;
-    })
-  }
-
   return (
     <>
       <HeaderDashboard/>
-      <>
-        <Container>
-          <div className="d-flex justify-content-between align-items-center m-1 p-2">
-            <div className="font-weight-bold">
-              Books ({state.bookArray.length})
-            </div>
-            <div>
-              <DropdownButton 
-                id="dropdown-basic-button" 
-                variant="none"
-                title="Sort By relevance"
-              >
-                <Dropdown.Item href="#/action-1">Sort by title</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Sort by price</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Sort by author</Dropdown.Item>
-              </DropdownButton>
-            </div>
+      <Container>
+        <div className="d-flex justify-content-between align-items-center m-1 p-2">
+          <div className="font-weight-bold">
+            Books ({state.bookArray.length})
           </div>
-          <Row>
-            {test()} 
-          </Row>
-        </Container>
-      </>
+          <div>
+            <DropdownButton 
+              id="dropdown-basic-button" 
+              variant="none"
+              title="Sort By relevance"
+            >
+              <Dropdown.Item href="#/action-1">Sort by title</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Sort by price</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Sort by author</Dropdown.Item>
+            </DropdownButton>
+          </div>
+        </div>
+        <Row className="m-1 p-2">
+          {state.bookArray.map((book, idx) => (
+            <Col 
+              key={idx}
+              sm={12}
+              md={6}
+              lg={4}
+              xl={3}
+            >
+              <BookCard book={book} />
+            </Col>
+          ))} 
+        </Row>
+      </Container>
       <Footer/>
     </>
   )
