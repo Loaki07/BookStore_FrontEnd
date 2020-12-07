@@ -8,9 +8,11 @@ const BookCard = ({book}) => {
   return (
     <Card 
       className="m-3 p-3 rounded book-card"
-      fluid
     >
-      <Link to={`/books/${book._id}`}>
+      <Link 
+        to={`/books/${book._id}`}
+        className="text-center"
+      >
         <Card.Img 
           className='book-image'
           src={book.image}

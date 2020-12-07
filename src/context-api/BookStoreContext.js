@@ -12,6 +12,8 @@ export const BookStoreProvider = (props) => {
     mobileNumber: '',
     toggleLogInSignUp: true,
     bookArray: [],
+    pages: '',
+    page: '',
   });
 
   return (

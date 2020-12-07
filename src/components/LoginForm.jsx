@@ -26,7 +26,7 @@ const validationSchema = Yup.object().shape({
                .required('Required!'),
 })
 
-const LoginForm = (props) => {
+const LoginForm = ({ history }) => {
   const [state, setState] = useContext(BookStoreContext);
 
   const handleFormChange = (e) =>{

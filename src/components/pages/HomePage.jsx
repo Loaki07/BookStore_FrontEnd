@@ -8,7 +8,7 @@ import '../styles/homepage.scss';
 import logo from  '../../assets/bookstore-logo-circle.png';
 
 
-const HomePage = () => {
+const HomePage = ({ history }) => {
   const [state, setState] = useContext(BookStoreContext);
 
   const toggleLogInForm = (e) => {

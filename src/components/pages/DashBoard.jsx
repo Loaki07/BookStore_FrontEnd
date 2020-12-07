@@ -2,26 +2,29 @@ import React, { useContext, useEffect, useCallback } from 'react';
 import { BookStoreContext } from '../../context-api/BookStoreContext';
 import HeaderDashboard from '../HeaderDashboard.jsx';
 import Footer from '../Footer.jsx';
+import Paginate from '../Paginate.jsx';
 import BookCard from '../BookCard.jsx';
 import '../styles/dashboard.scss'
 import { Container, DropdownButton, Dropdown, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BookApis from '../../services/BookApis';
 
-const {getAllBooks, addBook} = new BookApis();
+const {getAllBooks, addBook, getAllBooksForPagination} = new BookApis();
 
-const DashBoard = () => {
+const DashBoard = ({ match }) => {
 
   const [state, setState] = useContext(BookStoreContext);
 
+  const pageNumber = match.params.pageNumber || 1;
+
   const getBooks = useCallback(async() => {
     try {
-      const result = await getAllBooks();
-      setState({...state, bookArray: result.data.data})
+      const result = await getAllBooksForPagination(pageNumber);
+      setState({...state, bookArray: result.data.data, pages: result.data.pages, page: result.data.page})
     } catch (error) {
       console.log(error);
     }
-  }, [setState, state]);
+  }, [setState, state, pageNumber]);
 
   useEffect(() => {
     getBooks();
@@ -60,6 +63,7 @@ const DashBoard = () => {
             </Col>
           ))} 
         </Row>
+        <Paginate pages={state.pages} page={state.page} />
       </Container>
       <Footer/>
     </>

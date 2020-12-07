@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import { BookStoreContext } from '../../context-api/BookStoreContext';
 import HeaderDashboard from '../HeaderDashboard.jsx';
 import Footer from '../Footer.jsx';
-import { Breadcrumb, Container, Row, Col, Image, ListGroup, Button, ButtonGroup } from 'react-bootstrap';
+import { Breadcrumb, Container, Row, Col, Image, ListGroup, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import '../styles/book.scss'
 
@@ -17,7 +17,6 @@ const Book = ({ match }) => {
       <Container>
         <Breadcrumb className='book-bread-crumb' >
           <LinkContainer to='/dashboard'>
-
             <Breadcrumb.Item>Home</Breadcrumb.Item>
           </LinkContainer>
           <LinkContainer to={`/books/${book._id}`}>
@@ -28,7 +27,7 @@ const Book = ({ match }) => {
         </Breadcrumb>
         <Row>
           <Col md={3}>
-            <div className='m-3 p-3 book-image-container'>
+            <div className='m-3 p-3 book-image-container text-center'>
               <Image 
                 src={book.image}
                 alt={`${book.title} image`} 
