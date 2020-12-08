@@ -20,7 +20,11 @@ const DashBoard = ({ match }) => {
   const getBooks = useCallback(async() => {
     try {
       const result = await getAllBooksForPagination(pageNumber);
-      setState({...state, bookArray: result.data.data, pages: result.data.pages, page: result.data.page})
+      setState({...state, 
+        bookArray: result.data.data, 
+        pages: result.data.pages, 
+        page: result.data.page
+      })
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +37,7 @@ const DashBoard = ({ match }) => {
   return (
     <>
       <HeaderDashboard/>
-      <Container>
+      <Container className='main'>
         <div className="d-flex justify-content-between align-items-center m-1 p-2">
           <div className="font-weight-bold">
             Books ({state.bookArray.length})
