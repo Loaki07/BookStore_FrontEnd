@@ -9,18 +9,18 @@ import '../styles/book.scss'
 const Book = ({ match, history }) => {
   const [state, setState] = useContext(BookStoreContext);
 
-  const book = state.bookArray.find(bookitem => match.params.id === bookitem._id);
+  const currBook = state.bookArray.find(bookitem => match.params.id === bookitem._id);
 
   const handleAddToCart = (e) => {
     e.preventDefault();
-    setState({...state, cart: [...state.cart, book._id]});
-    history.push(`/cart?bookId=${book._id}`);
+    setState({...state, cart: [...state.cart, currBook]});
+    history.push(`/cart?bookId=${currBook._id}`);
   }
 
   const handleAddToWishlist = (e) => {
     e.preventDefault();
-    setState({...state, wishlist: [...state.wishlist, book._id]});
-    history.push(`/wishlist?bookId=${book._id}`);
+    setState({...state, wishlist: [...state.wishlist,   currBook]});
+    history.push(`/wishlist?bookId=${currBook._id}`);
   }
 
   return (
@@ -31,9 +31,9 @@ const Book = ({ match, history }) => {
           <LinkContainer to='/dashboard'>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
           </LinkContainer>
-          <LinkContainer to={`/books/${book._id}`}>
+          <LinkContainer to={`/books/${currBook._id}`}>
             <Breadcrumb.Item active>
-              Book({book.title})
+              Book({currBook.title})
             </Breadcrumb.Item>
           </LinkContainer>
         </Breadcrumb>
@@ -41,19 +41,19 @@ const Book = ({ match, history }) => {
           <Col md={3}>
             <div className='m-3 p-3 book-image-container text-center'>
               <Image 
-                src={book.image}
-                alt={`${book.title} image`} 
+                src={currBook.image}
+                alt={`${currBook.title} image`} 
               />
             </div>
             <div className='m-2 p-2 d-flex justify-content-between'>
               <LinkContainer 
-                to={`/cart?bookId=${book._id}`} 
+                to={`/cart?bookId=${currBook._id}`} 
                 onClick={handleAddToCart}
               >
                 <Button 
                   variant="danger"
                   type='button'
-                  disabled={book.quantity === 0}
+                  disabled={currBook.quantity === 0}
                   >ADD TO BAG</Button>
               </LinkContainer>
               <LinkContainer 
@@ -70,13 +70,13 @@ const Book = ({ match, history }) => {
           <Col md={9}>
             <ListGroup variant='flush'>
               <ListGroup.Item>
-                <h3>{book.title}</h3>
+                <h3>{currBook.title}</h3>
                 <div className='font-weight-normal m-1 p-1'>
-                  by {book.author}
+                  by {currBook.author}
                 </div>
                 <div className='m-1 p-1'>Rating</div>
                 <h5 className='m-1 p-1'>
-                Rs. {book.price}
+                Rs. {currBook.price}
                 </h5>
               </ListGroup.Item>
               <ListGroup.Item>
@@ -84,7 +84,7 @@ const Book = ({ match, history }) => {
                  Book Detail
                 </h5> 
                 <div>
-                  {book.description}
+                  {currBook.description}
                 </div>
               </ListGroup.Item>
             </ListGroup>
