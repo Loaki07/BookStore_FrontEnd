@@ -15,15 +15,14 @@ const Wishlist = ({match, location, history}) => {
 
   const handeleDelete = (e) => {
     const tempWishlistArray = [...state.wishlist];
+    const index = tempWishlistArray.indexOf(e.target.value)
+    if (index !== -1) {
+      tempWishlistArray.splice(index, 1);
+      setState({...state, wishlist: tempWishlistArray})
+    }
     console.log(e.target.value);
-    tempWishlistArray.map((item, idx) => {
-      if (item._id === e.target.value) {
-        tempWishlistArray.slice(idx, 1);
-      }
-      console.log(tempWishlistArray);
-      return setState({...state, wishlist: tempWishlistArray})
-    })
   }
+  console.log(state.wishlist);
 
   return (
     <div>
@@ -36,7 +35,7 @@ const Wishlist = ({match, location, history}) => {
           <LinkContainer to={`/books/${bookId}`}>
             <Breadcrumb.Item>Back</Breadcrumb.Item>
           </LinkContainer>
-          <LinkContainer to={`/cart`}>
+          <LinkContainer to={`/wishlist`}>
             <Breadcrumb.Item active>
               My Wishlist({state.wishlist.length})
             </Breadcrumb.Item>

@@ -16,11 +16,16 @@ export const BookStoreProvider = (props) => {
     page: '',
     cart: [],
     wishlist: [],
+    customerFullName: '',
+    customerMobileNumber: '',
+    customerAddress: '',
+    customerCity: '',
+    customerState: '',
   });
 
   return (
     <div>
-      <BookStoreContext.Provider value={[ state, setState ]}>
+      <BookStoreContext.Provider value={[state, setState]}>
         {props.children}
       </BookStoreContext.Provider>
     </div>

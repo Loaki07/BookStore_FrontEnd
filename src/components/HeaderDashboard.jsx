@@ -46,7 +46,7 @@ const HeaderDashboard = () => {
                 Profile
               </Nav.Link>
             </LinkContainer>
-            <LinkContainer to='#link'>
+            <LinkContainer to='/cart'>
               <Nav.Link>
                 Cart
               </Nav.Link>
