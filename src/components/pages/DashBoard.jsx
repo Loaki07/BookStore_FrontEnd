@@ -36,7 +36,7 @@ const DashBoard = ({ match }) => {
 
   return (
     <>
-      <HeaderDashboard/>
+      <HeaderDashboard />
       <Container className='main'>
         <div className="d-flex justify-content-between align-items-center m-1 p-2">
           <div className="font-weight-bold">

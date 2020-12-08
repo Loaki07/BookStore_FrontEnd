@@ -6,10 +6,22 @@ import { Breadcrumb, Container, Row, Col, Image, ListGroup, Button } from 'react
 import { LinkContainer } from 'react-router-bootstrap';
 import '../styles/book.scss'
 
-const Book = ({ match }) => {
+const Book = ({ match, history }) => {
   const [state, setState] = useContext(BookStoreContext);
 
   const book = state.bookArray.find(bookitem => match.params.id === bookitem._id);
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    setState({...state, cart: [...state.cart, book._id]});
+    history.push(`/cart?bookId=${book._id}`);
+  }
+
+  const handleAddToWishlist = (e) => {
+    e.preventDefault();
+    setState({...state, wishlist: [...state.wishlist, book._id]});
+    history.push(`/wishlist?bookId=${book._id}`);
+  }
 
   return (
     <>
@@ -34,15 +46,25 @@ const Book = ({ match }) => {
               />
             </div>
             <div className='m-2 p-2 d-flex justify-content-between'>
-              <Button 
-                variant="danger"
-                type='button'
-                disabled={book.quantity === 0}
-              >ADD TO BAG</Button>
-              <Button 
-                variant="secondary"
-                type='button'
-              >WISHLIST</Button>
+              <LinkContainer 
+                to={`/cart?bookId=${book._id}`} 
+                onClick={handleAddToCart}
+              >
+                <Button 
+                  variant="danger"
+                  type='button'
+                  disabled={book.quantity === 0}
+                  >ADD TO BAG</Button>
+              </LinkContainer>
+              <LinkContainer 
+                to='/wishlist'
+                onClick={handleAddToWishlist}
+              >
+                <Button 
+                  variant="secondary"
+                  type='button'
+                >WISHLIST</Button>
+              </LinkContainer>
             </div>
           </Col>
           <Col md={9}>
