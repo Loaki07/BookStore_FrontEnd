@@ -19,9 +19,6 @@ const Cart = ({match, location, history}) => {
           <LinkContainer to='/dashboard'>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
           </LinkContainer>
-          <LinkContainer to={`/books/${bookId}`}>
-            <Breadcrumb.Item>Back</Breadcrumb.Item>
-          </LinkContainer>
           <LinkContainer to={`/cart`}>
             <Breadcrumb.Item active>
               My Cart({state.cart.length})

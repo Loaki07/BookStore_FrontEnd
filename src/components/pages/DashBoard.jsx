@@ -54,7 +54,9 @@ const DashBoard = ({ match }) => {
             </DropdownButton>
           </div>
         </div>
-        <Row className="m-1 p-2">
+        <Row 
+          className="m-1 p-2 stop-overflow"
+        >
           {state.bookArray.map((book, idx) => (
             <Col 
               key={idx}

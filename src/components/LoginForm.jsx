@@ -29,7 +29,7 @@ const validationSchema = Yup.object().shape({
 const LoginForm = ({ history }) => {
   const [state, setState] = useContext(BookStoreContext);
 
-  const handleFormChange = (e) =>{
+  const handleFormChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value})
   }
 
@@ -45,8 +45,9 @@ const LoginForm = ({ history }) => {
         toast.success('Login Successfull !', {
           position: toast.POSITION.TOP_CENTER
         })
+        setState({...state, isLoggedIn: true })
         localStorage.setItem('token', result.data.token);
-        // props.history.push('/dashboard');
+        history.push('/dashboard');
         console.log(result);
       }
     } catch (error) {

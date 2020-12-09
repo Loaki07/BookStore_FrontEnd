@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 
 export const BookStoreContext = createContext();
 
@@ -6,6 +6,7 @@ export const BookStoreProvider = (props) => {
   const [state, setState] = useState({
     loginUserEmailId: '',
     loginUserPassword: '',
+    isLoggedIn: false,
     fullName: '',
     emailId: '',
     password: '',
@@ -31,3 +32,5 @@ export const BookStoreProvider = (props) => {
     </div>
   );
 };
+
+export const useBookStoreContext = () => useContext(BookStoreContext);
