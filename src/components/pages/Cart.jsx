@@ -43,8 +43,10 @@ const Cart = ({match, location, history}) => {
                 variant="none"
                 defaultActiveKey='0'
                 title="Use Current Location"
-              >
-                <Dropdown.Item href="#/action-1" eventKey='0'>Use Current Location</Dropdown.Item>
+                >
+                  <Dropdown.Item href="#/action-1" eventKey='0'>
+                    Use Current Location
+                  </Dropdown.Item>
             </DropdownButton>
               </div>
               { state.cart.map((book, idx) => (

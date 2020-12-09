@@ -5,6 +5,7 @@ import DashBoard from './components/pages/DashBoard.jsx';
 import Book from './components/pages/Book.jsx';
 import Cart from './components/pages/Cart.jsx';
 import Wishlist from './components/pages/Wishlist.jsx';
+import PleaseLogIn from './components/pages/PleaseLogIn.jsx';
 
 const Routes = () => {
   return (
@@ -17,6 +18,7 @@ const Routes = () => {
           <Route path="/books/:id" component={Book} />
           <Route path="/cart" component={Cart} />
           <Route path="/wishlist" component={Wishlist} />
+          <Route path="/please-log-in" component={PleaseLogIn} />
         </Switch>
       </Router>
     </div>
